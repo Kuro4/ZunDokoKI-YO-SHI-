@@ -68,12 +68,10 @@ namespace WpfApplication1
             {
                 _Zundoko.Value += item + Environment.NewLine;
             }
-
         }
 
         public ZunDokoModel()
         {
-
             var str = StreamCreater.TetteyteretteyStream().ToList<string>();
             str.Add(tetteyterettettettetterey);
             foreach (var item in str)
