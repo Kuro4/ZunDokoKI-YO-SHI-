@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Zundoko &amp; Tetteyterettey " Height="350" Width="525">
     <Window.DataContext>
-        <local:ZunDokoViewModel/>
+        <local:ViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -16,13 +16,12 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20">
-            <RadioButton Content="ｽﾞﾝﾄﾞｺ" Margin="0,0,80,0"/>
-            <RadioButton Content="ﾃｯﾃｰﾃﾚｯﾃｰ"/>
+            <RadioButton Content="ｽﾞﾝﾄﾞｺ" Margin="0,0,80,0" IsChecked="{Binding _isZundokoSelect}"/>
+            <RadioButton Content="ﾃｯﾃｰﾃﾚｯﾃｰ" IsChecked="{Binding _isTetteyteretteySelect}"/>
         </StackPanel>
-        <Button Content="Start!" Grid.Row="1" Command="{Binding model.C_ZundokoStart, Mode=OneWay}"/>
+        <Button Content="Start!" Grid.Row="1" Command="{Binding C_Start, Mode=OneWay}"/>
         <ScrollViewer Grid.Row="2">
-            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="{Binding model._Zundoko.Value}"/>
+            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="{Binding _Model._Result.Value}"/>
         </ScrollViewer>
-
     </Grid>
 </Window>
