@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Collections;
 using System.Reactive.Linq;
+using System.Threading;
 
 namespace WpfApplication1
 {
-
     public static class StreamCreater
     {
         static readonly private string[] zundoko = { "ズン", "ドコ", };
@@ -50,37 +50,34 @@ namespace WpfApplication1
                 yield return tetteyteretteyQueue.Last();
             }
         }
+
     }
 
 
-    public class ZunDokoModel
+    public class Model
     {
-        static readonly string kiyoshi = "キ・ヨ・シ！";
-        static readonly string tetteyterettettettetterey = "ﾃｯﾃｰﾃﾚｯﾃｯﾃｯﾃｯﾃﾚｰ";
-        public ReactiveProperty<string> _Zundoko { get; } = new ReactiveProperty<string>("");
-        public ReactiveProperty<string> _Tetteyterettey { get; } = new ReactiveProperty<string>("");
-        public ReactiveCommand C_ZundokoStart { get; } = new ReactiveCommand();
-        public ReactiveCommand C__TetteyteretteyStart { get; } = new ReactiveCommand();
+        static readonly private string kiyoshi = "キ・ヨ・シ！";
+        static readonly private string tetteyterettettettetterey = "ﾃｯﾃｰﾃﾚｯﾃｯﾃｯﾃｯﾃﾚｰ";
+        public ReactiveProperty<string> _Result { get; } = new ReactiveProperty<string>();
 
-        private void ZundokoStart()
-        {               
-            foreach(var item in StreamCreater.ZundokoStream())
+        public void ZundokoStart()
+        {
+            _Result.Value = "";
+            foreach(var zundoko in StreamCreater.ZundokoStream())
             {
-                _Zundoko.Value += item + Environment.NewLine;
+                _Result.Value += zundoko + Environment.NewLine;
             }
+            _Result.Value += kiyoshi;
 
         }
-
-        public ZunDokoModel()
+        public void TetteyteretteyStart()
         {
-
-            var str = StreamCreater.TetteyteretteyStream().ToList<string>();
-            str.Add(tetteyterettettettetterey);
-            foreach (var item in str)
+            _Result.Value = "";
+            foreach(var tetteyterettey in StreamCreater.TetteyteretteyStream())
             {
-                Console.WriteLine(item);
+                _Result.Value += tetteyterettey + Environment.NewLine;
             }
-            C_ZundokoStart.Subscribe(ZundokoStart);
+            _Result.Value += tetteyterettettettetterey;
         }
     }
 
