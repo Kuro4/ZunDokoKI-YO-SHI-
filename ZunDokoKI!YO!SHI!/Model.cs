@@ -13,71 +13,52 @@ namespace WpfApplication1
 {
     public static class StreamCreater
     {
-        static readonly private string[] zundoko = { "ズン", "ドコ", };
-        static readonly private string zundokoPattern = "ズンズンズンズンドコ";
-        static readonly private Queue<string> zundokoQueue = new Queue<string>();
-
-        static readonly private string[] tetteyterettey = { "ﾃｯﾃｰﾃﾚｯﾃｰ", "(ﾃｯﾃｰﾃﾚｯﾃｰ)", "ﾃ　ｯ　ﾃ　ｰ　ﾃ　ﾚ　ｯ　ﾃ　ｰ", "ﾊﾟｰﾊﾟﾗｯﾊﾟｰ", "ﾗｰﾗﾗｰﾗｰ" };
-        static readonly private string tetteyteretteyPattern = "ﾃｯﾃｰﾃﾚｯﾃｰﾃｯﾃｰﾃﾚｯﾃｰﾃｯﾃｰﾃﾚｯﾃｰ";
-        static readonly private Queue<string> tetteyteretteyQueue = new Queue<string>();
-
+        static readonly private Queue<string> queue = new Queue<string>();
         static private Random random = new Random();
 
-        public static IEnumerable<string> ZundokoStream()
+        public static IEnumerable<string> StreamCreate(string[] target,string[] pattern)
         {
-            zundokoQueue.Clear();
-            while (string.Join("", zundokoQueue) != zundokoPattern)
+            queue.Clear();
+            while (!queue.SequenceEqual(pattern))
             {
-                zundokoQueue.Enqueue(zundoko[random.Next(zundoko.Count())]);
-                if (zundokoQueue.Count == 6)
+                queue.Enqueue(target[random.Next(target.Count())]);
+                if (queue.Count == pattern.Count() + 1)
                 {
-                    zundokoQueue.Dequeue();
+                    queue.Dequeue();
                 }
-                yield return zundokoQueue.Last();
+                yield return queue.Last();
             }
         }
-
-        public static IEnumerable<string> TetteyteretteyStream()
-        {
-            tetteyteretteyQueue.Clear();
-            while (string.Join("", tetteyteretteyQueue) != tetteyteretteyPattern)
-            {
-                tetteyteretteyQueue.Enqueue(tetteyterettey[random.Next(tetteyterettey.Count())]);
-                if (tetteyteretteyQueue.Count == 4)
-                {
-                    tetteyteretteyQueue.Dequeue();
-                }
-                yield return tetteyteretteyQueue.Last();
-            }
-        }
-
     }
-
 
     public class Model
     {
+        static readonly private string[] zundoko = { "ズン", "ドコ", };
+        static readonly private string[] zundokoPattern = { "ズン","ズン","ズン","ズン","ドコ" };
         static readonly private string kiyoshi = "キ・ヨ・シ！";
+        static readonly private string[] tetteyterettey = { "ﾃｯﾃｰﾃﾚｯﾃｰ", "(ﾃｯﾃｰﾃﾚｯﾃｰ)", "ﾃ　ｯ　ﾃ　ｰ　ﾃ　ﾚ　ｯ　ﾃ　ｰ", "ﾊﾟｰﾊﾟﾗｯﾊﾟｰ", "ﾗｰﾗﾗｰﾗｰ" };
+        static readonly private string[] tetteyteretteyPattern = { "ﾃｯﾃｰﾃﾚｯﾃｰ","ﾃｯﾃｰﾃﾚｯﾃｰ","ﾃｯﾃｰﾃﾚｯﾃｰ" };
         static readonly private string tetteyterettettettetterey = "ﾃｯﾃｰﾃﾚｯﾃｯﾃｯﾃｯﾃﾚｰ";
         public ReactiveProperty<string> _Result { get; } = new ReactiveProperty<string>();
 
         public void ZundokoStart()
         {
-            _Result.Value = "";
-            foreach(var zundoko in StreamCreater.ZundokoStream())
-            {
-                _Result.Value += zundoko + Environment.NewLine;
-            }
-            _Result.Value += kiyoshi;
-
+            StreamStart(zundoko, zundokoPattern, kiyoshi);
         }
+
         public void TetteyteretteyStart()
         {
+            StreamStart(tetteyterettey, tetteyteretteyPattern, tetteyterettettettetterey);
+        }
+
+        private void StreamStart(string[] target,string[] pattern,string lastAddString)
+        {
             _Result.Value = "";
-            foreach(var tetteyterettey in StreamCreater.TetteyteretteyStream())
+            foreach (var item in StreamCreater.StreamCreate(target, pattern))
             {
-                _Result.Value += tetteyterettey + Environment.NewLine;
+                _Result.Value += item + Environment.NewLine;
             }
-            _Result.Value += tetteyterettettettetterey;
+            _Result.Value += lastAddString;
         }
     }
 
