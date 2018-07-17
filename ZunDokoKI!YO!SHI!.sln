@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZunDokoKI!YO!SHI!", "ZunDokoKI!YO!SHI!\ZunDokoKI!YO!SHI!.csproj", "{E9689469-FBFF-4143-9D87-AE4DEE4C39BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZunDokoKIYOSHI.Core", "ZunDokoKIYOSHI.Core\ZunDokoKIYOSHI.Core.csproj", "{C9D2053F-766D-4DB0-B8EC-10A83D4DC248}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{E9689469-FBFF-4143-9D87-AE4DEE4C39BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9689469-FBFF-4143-9D87-AE4DEE4C39BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9689469-FBFF-4143-9D87-AE4DEE4C39BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9D2053F-766D-4DB0-B8EC-10A83D4DC248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9D2053F-766D-4DB0-B8EC-10A83D4DC248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9D2053F-766D-4DB0-B8EC-10A83D4DC248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9D2053F-766D-4DB0-B8EC-10A83D4DC248}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BB07BDF2-B08D-4D1E-8483-03442F477B38}
 	EndGlobalSection
 EndGlobal
